@@ -1,4 +1,6 @@
-PRODUCT_BRAND ?= cyanogenmod
+PRODUCT_BRAND ?= xoplaxos
+
+XOS_VERSION := 2.1
 
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension
@@ -35,10 +37,10 @@ endif
 
 ifdef CM_NIGHTLY
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rommanager.developerid=cyanogenmodnightly
+    ro.rommanager.developerid=xoplaxosnightly
 else
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rommanager.developerid=cyanogenmod
+    ro.rommanager.developerid=xoplaxos
 endif
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
@@ -230,10 +232,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/xoplax/overlay/common
 
-PRODUCT_VERSION_MAJOR = 12
-PRODUCT_VERSION_MINOR = 1
-PRODUCT_VERSION_MAINTENANCE = 0-RC0
-
 # Set CM_BUILDTYPE from the env RELEASE_TYPE, for jenkins compat
 
 ifndef CM_BUILDTYPE
@@ -252,8 +250,7 @@ endif
 ifdef CM_BUILDTYPE
     ifneq ($(CM_BUILDTYPE), SNAPSHOT)
         ifdef CM_EXTRAVERSION
-            # Force build type to EXPERIMENTAL
-            CM_BUILDTYPE := EXPERIMENTAL
+            CM_BUILDTYPE := SNAPSHOT
             # Remove leading dash from CM_EXTRAVERSION
             CM_EXTRAVERSION := $(shell echo $(CM_EXTRAVERSION) | sed 's/-//')
             # Add leading dash to CM_EXTRAVERSION
@@ -272,11 +269,11 @@ ifdef CM_BUILDTYPE
     endif
 else
     # If CM_BUILDTYPE is not defined, set to UNOFFICIAL
-    CM_BUILDTYPE := UNOFFICIAL
+    CM_BUILDTYPE := HOMEMADE
     CM_EXTRAVERSION :=
 endif
 
-ifeq ($(CM_BUILDTYPE), UNOFFICIAL)
+ifeq ($(CM_BUILDTYPE), HOMEMADE)
     ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
         CM_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
     endif
