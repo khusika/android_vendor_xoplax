@@ -131,6 +131,9 @@ PRODUCT_COPY_FILES += \
 # T-Mobile theme engine
 include vendor/xoplax/config/themes_common.mk
 
+# SuperSU
+include vendor/xoplax/config/supersu.mk
+
 # Required CM packages
 PRODUCT_PACKAGES += \
     Development \
