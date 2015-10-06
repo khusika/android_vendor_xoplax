@@ -1,0 +1,16 @@
+XOPLAX OS
+========
+
+Want to contribute in XOPLAX OS?
+Feel free to join INSIDER community.
+You can contact at "yosef@yosefadi.tk" 
+and at "estiko@mediaqu.com"
+
+----
+Life of patch
+----
+
+You can contribute to with submitting patch into XOPLAX Gerrit code review
+You can access at http://ajogers.tk
+
+

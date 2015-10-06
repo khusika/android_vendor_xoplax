@@ -1,0 +1,25 @@
+XOPLAX OS
+=========
+
+Maintainer :
+-- Lenovo A706 : Estiko Aji Saputro
+-- Sasmsung Galaxy Tab 2 : Yosef Adi Sulistyo
+-- Xiaomi Redmi 1S : Yosef Adi Sulistyo
+-- ASUS Zenfone 5 : Yosef Adi Sulistyo
+-- Samsung Galaxy Tab 4 (8 & 10.1) : Yosef Adi Sulistyo
+-- Yu Yureka : Yosef Adi Sulistyo
+-- Smartfren Rendang : Yosef Adi Sulistyo
+-- Google Nexus 5 : Yosef Adi Sulistyo
+-- OnePlus One : Yosef Adi Sulistyo
+-- Smartfren AD686G : Joe Biever
+-- Smartfren JSR D5C : Estiko Aji Saputro
+-- Smartfren JSR I6CP : Estiko Aji Saputro
+-- Samsung Galaxy S4 LTE : Yosef Adi Sulistyo
+-- Xiaomi Redmi 2 (2014811) : Yosef Adi Sulistyo
+-- Samsung Galaxy Grand Duos : Yosef Adi Sulistyo
+-- Wiko Rainbow : Yosef Adi Sulistyo
+-- Micromax A120 : Yosef Adi Sulistyo
+-- Smartfren Andromax G : PWR
+
+Forum Contributor :
+-- WhatsApp : Mahameru

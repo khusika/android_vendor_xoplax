@@ -1,0 +1,55 @@
+#!/bin/bash
+
+clear
+
+export XOPLAX_OS_MAJOR="KK"
+export XOPLAX_OS_MINOR="Insider Preview"
+export XOPLAX_OS_BUILDNUMBER="1011"
+
+export BUILDVAR="userdebug"
+
+PROCI=$(grep "^model" /proc/cpuinfo)
+CPUS=$(grep "^processor" /proc/cpuinfo | wc -l)
+OS=$(uname -rsm)
+opt_jobs="$CPUS"
+
+. ./vendor/cm/tools/color.sh
+
+echo ${bldblu}"WELCOME..."${txtrst}
+echo " "
+echo "  \  /   "
+echo "   \/    "
+echo "   /\    "
+echo "  /  \   "
+echo " "
+
+# setup environment
+echo -e ${bldblu}"Setting up environment..."${txtrst}
+. build/envsetup.sh
+
+echo " "
+echo ${bldred}"WILL BUILD.."${txtrst}
+echo ${bldcya}"XOPLAX OS"${txtrst}
+echo " "
+echo ${bldgrn}"$XOPLAX_OS_MAJOR $XOPLAX_OS_MINOR $XOPLAX_OS_BUILDNUMBER"${txtrst}
+
+echo "You're building on $OS"
+echo " "
+echo ${bldylw}"Lunching device..."${txtrst}
+lunch cm_$1-$BUILDVAR
+
+echo " "
+echo ${bldgrn}"Will build WebView from source!"${txtrst}
+echo ${bldred}"Will be use O3 Optimization level!"${txtrst}
+export TARGET_USE_O_LEVEL_3=true
+echo " "
+echo ${bldgrn}"Set up the ccache and set max size to 30GiB!"${txtrst}
+export USE_CCACHE=1
+ccache -M 30G
+echo " "
+
+echo ${bldred}"Starting the real build.."${txtrst}
+make -j"$opt_jobs" bacon
+vendor/cm/tools/bcom.sh $1
+
+echo "Lets Tricky begin!"

@@ -1,0 +1,12 @@
+XOPLAX-OS
+==========
+What is Xoplax OS?
+--
+Xoplax OS is the modified CyanogenMod source code.
+We has a highly rich design and an optimized performance.
+--
+
+CHANGELOG :
+
+## Insider Preview 1.0 
+- Initial Release for Insider and supporter.
