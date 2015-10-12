@@ -106,37 +106,13 @@ PRODUCT_COPY_FILES += \
     vendor/xoplax/prebuilt/common/etc/init.d/05netspeed:system/etc/init.d/05netspeed \
     vendor/xoplax/prebuilt/common/etc/init.d/99zram:system/etc/init.d/99zram \
     vendor/xoplax/prebuilt/common/etc/init.d/99Batterysaver:system/etc/init.d/99Batterysaver \
-    vendor/xoplax/prebuilt/common/etc/init.d/99Batterysaver:system/etc/init.d/sysctl_tweaks \
-    vendor/xoplax/prebuilt/common/etc/init.d/80check:system/etc/init.d/80check \
-    vendor/xoplax/prebuilt/common/etc/init.d/81sysctl:system/etc/init.d/81sysctl \
-    vendor/xoplax/prebuilt/common/etc/init.d/81setrenice:system/etc/init.d/81setrenice \
-    vendor/xoplax/prebuilt/common/etc/init.d/81filesystem:system/etc/init.d/81filesystem \
-    vendor/xoplax/prebuilt/common/etc/init.d/81freemem:system/etc/init.d/81freemem \
-    vendor/xoplax/prebuilt/common/etc/init.d/81removecache:system/etc/init.d/81removecache \
-    vendor/xoplax/prebuilt/common/etc/init.d/81fixperms:system/etc/init.d/81fixperms \
-    vendor/xoplax/prebuilt/common/etc/init.d/81kernel:system/etc/init.d/81kernel \
-    vendor/xoplax/prebuilt/common/etc/init.d/81cron:system/etc/init.d/81cron \
-    vendor/xoplax/prebuilt/common/etc/init.d/81sdboost:system/etc/init.d/81sdboost \
-    vendor/xoplax/prebuilt/common/etc/init.d/81battery:system/etc/init.d/81battery \
-    vendor/xoplax/prebuilt/common/etc/init.d/81touch:system/etc/init.d/81touch \
-    vendor/xoplax/prebuilt/common/etc/init.d/81vm:system/etc/init.d/81vm \
-    vendor/xoplax/prebuilt/common/etc/init.d/81net:system/etc/init.d/81net \
-    vendor/xoplax/prebuilt/common/etc/init.d/81sleepers:system/etc/init.d/81sleepers \
-    vendor/xoplax/prebuilt/common/etc/init.d/81journalism:system/etc/init.d/81journalism \
-    vendor/xoplax/prebuilt/common/etc/init.d/81sqlite:system/etc/init.d/81sqlite \
-    vendor/xoplax/prebuilt/common/etc/init.d/81wifisleep:system/etc/init.d/81wifisleep \
-    vendor/xoplax/prebuilt/common/etc/init.d/81iostats:system/etc/init.d/81iostats \
-    vendor/xoplax/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
-
-# Cron
-PRODUCT_COPY_FILES += \
-    vendor/xoplax/prebuilt/common/etc/cron/cron.conf:system/etc/cron/cron.conf \
-    vendor/xoplax/prebuilt/common/etc/cron/cron.daily/00drop_caches:system/etc/cron/cron.daily/00drop_caches \
-    vendor/xoplax/prebuilt/common/etc/cron/cron.daily/01clear_cache:system/etc/cron/cron.daily/01clear_cache \
-    vendor/xoplax/prebuilt/common/etc/cron/cron.hourly/00drop_caches:system/etc/cron/cron.hourly/00drop_caches \
-    vendor/xoplax/prebuilt/common/etc/cron/cron.hourly/01clear_cache:system/etc/cron/cron.hourly/01clear_cache \
-    vendor/xoplax/prebuilt/common/etc/cron/cron.weekly/00drop_caches:system/etc/cron/cron.weekly/00drop_caches \
-    vendor/xoplax/prebuilt/common/etc/cron/cron.weekly/01clear_cache:system/etc/cron/cron.weekly/01clear_cache
+    vendor/xoplax/prebuilt/common/etc/init.d/sysctl_tweaks:system/etc/init.d/sysctl_tweaks \
+    vendor/xoplax/prebuilt/common/etc/init.d/09setrenice:system/etc/init.d/09setrenice \
+    vendor/xoplax/prebuilt/common/etc/init.d/00batterycalibrate:system/etc/init.d/00batterycalibrate \
+    vendor/xoplax/prebuilt/common/etc/init.d/04journalism:system/etc/init.d/04journalism \
+    vendor/xoplax/prebuilt/common/etc/init.d/14enable_touchscreen:system/etc/init.d/14enable_touchscreen \
+    vendor/xoplax/prebuilt/common/etc/init.d/47Kernel:system/etc/init.d/47Kernel \
+    vendor/xoplax/prebuilt/common/etc/init.d/S97ramscript:system/etc/init.d/S97ramscript
 
 # userinit support
 PRODUCT_COPY_FILES += \
@@ -181,16 +157,7 @@ PRODUCT_COPY_FILES += \
 # Custom XoplaX Packages
 PRODUCT_PACKAGES += \
     KernelAdiutor \
-    OmniSwitch \
-    Halo \
-    XoplaXWallpapers \
-    XOSWiz \
-    MusicPlus
-
-# Screen recorder
-PRODUCT_PACKAGES += \
-    libscreenrecorder \
-    ScreenRecorder
+    XoplaXWallpapers
 
 # T-Mobile theme engine
 include vendor/xoplax/config/themes_common.mk
@@ -214,11 +181,11 @@ PRODUCT_PACKAGES += \
     DSPManager \
     libcyanogen-dsp \
     audio_effects.conf \
-#    Apollo \
+    Apollo \
     CMFileManager \
     LockClock \
     CMUpdater \
-#    CMAccount \
+    CMAccount \
     CMHome
 
 # CM Hardware Abstraction Framework
