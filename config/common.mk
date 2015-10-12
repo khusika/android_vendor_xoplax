@@ -159,8 +159,9 @@ PRODUCT_PACKAGES += \
     KernelAdiutor \
     XoplaXWallpapers
 
-# SuperSU
-include vendor/xoplax/config/supersu.mk
+# SuperSu Flasher
+PRODUCT_COPY_FILES += \
+    vendor/xoplax/prebuilt/common/bin/supersuflasher.sh:system/bin/supersuflasher.sh
 
 # T-Mobile theme engine
 include vendor/xoplax/config/themes_common.mk
