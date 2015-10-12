@@ -159,6 +159,9 @@ PRODUCT_PACKAGES += \
     KernelAdiutor \
     XoplaXWallpapers
 
+# SuperSU
+include vendor/xoplax/config/supersu.mk
+
 # T-Mobile theme engine
 include vendor/xoplax/config/themes_common.mk
 
