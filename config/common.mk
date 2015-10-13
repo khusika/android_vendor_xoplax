@@ -158,7 +158,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     KernelAdiutor \
     PerformanceControl \
-    XoplaXWallpapers
+    XOSWallpapers
 
 # SuperSu Flasher
 PRODUCT_COPY_FILES += \
