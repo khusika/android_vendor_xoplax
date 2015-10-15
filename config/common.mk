@@ -159,6 +159,11 @@ PRODUCT_PACKAGES += \
     KernelAdiutor \
     XOSWallpapers
 
+# ChameleonOS Screen recorder
+PRODUCT_PACKAGES += \
+    ScreenRecorder \
+    libscreenrecorder
+
 # SuperSu Flasher
 PRODUCT_COPY_FILES += \
     vendor/xoplax/prebuilt/common/bin/supersuflasher.sh:system/bin/supersuflasher.sh
