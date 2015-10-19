@@ -169,8 +169,7 @@ PRODUCT_PACKAGES += \
     libscreenrecorder
 
 # SuperSu Flasher
-PRODUCT_COPY_FILES += \
-    vendor/xoplax/prebuilt/common/bin/supersuflasher.sh:system/bin/supersuflasher.sh
+include vendor/xoplax/config/supersu.mk
 
 # T-Mobile theme engine
 include vendor/xoplax/config/themes_common.mk
