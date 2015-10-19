@@ -154,10 +154,14 @@ PRODUCT_COPY_FILES += \
     vendor/xoplax/prebuilt/common/lib/libwavesfxservice.so:system/lib/libwavesfxservice.so \
     vendor/xoplax/prebuilt/common/lib/soundfx/libmaxxeffect-cembedded.so:system/lib/soundfx/libmaxxeffect-cembedded.so
 
+# Add Kernel Adiutor
+PRODUCT_COPY_FILES += \
+    vendor/xoplax/prebuilt/common/app/com.grarak.kerneladiutor.apk:system/app/com.grarak.kerneladiutor.apk
+
 # Custom XoplaX Packages
 PRODUCT_PACKAGES += \
-    KernelAdiutor \
-    XOSWallpapers
+    XOSWallpapers \
+    XOSWiz
 
 # ChameleonOS Screen recorder
 PRODUCT_PACKAGES += \
@@ -194,7 +198,7 @@ PRODUCT_PACKAGES += \
     CMFileManager \
     LockClock \
     CMUpdater \
-    CMAccount \
+#    CMAccount \
     CMHome
 
 # CM Hardware Abstraction Framework
