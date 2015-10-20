@@ -161,6 +161,7 @@ PRODUCT_COPY_FILES += \
 # Custom XoplaX Packages
 PRODUCT_PACKAGES += \
     XOSWallpapers \
+    OmniSwitch \
     XOSWiz
 
 # ChameleonOS Screen recorder
