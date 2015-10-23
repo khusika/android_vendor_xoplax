@@ -2,7 +2,7 @@
 $(call inherit-product, vendor/xoplax/config/common.mk)
 
 # Include Xoplax audio files
-include vendor/xoplax/config/cm_audio.mk
+include vendor/xoplax/config/xoplax_audio.mk
 
 # Optional CM packages
 PRODUCT_PACKAGES += \
