@@ -156,10 +156,7 @@ PRODUCT_PACKAGES += \
     CMFileManager \
     Eleven \
     LockClock \
-    CMUpdater \
-    CMAccount \
     CMHome \
-    CyanogenSetupWizard \
     CMSettingsProvider
 
 # CM Platform Library
@@ -180,10 +177,8 @@ PRODUCT_PACKAGES += \
     mke2fs \
     tune2fs \
     bash \
-    nano \
     htop \
     powertop \
-    lsof \
     mount.exfat \
     fsck.exfat \
     mkfs.exfat \
@@ -193,9 +188,7 @@ PRODUCT_PACKAGES += \
     ntfsfix \
     ntfs-3g \
     gdbserver \
-    micro_bench \
     oprofiled \
-    sqlite3 \
     strace
 
 # Openssh

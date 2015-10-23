@@ -1,26 +1,17 @@
-# Inherit common CM stuff
+# Inherit common Xoplax stuff
 $(call inherit-product, vendor/xoplax/config/common.mk)
 
-# Include CM audio files
+# Include Xoplax audio files
 include vendor/xoplax/config/cm_audio.mk
 
 # Optional CM packages
 PRODUCT_PACKAGES += \
-    Galaxy4 \
-    HoloSpiralWallpaper \
     LiveWallpapers \
     LiveWallpapersPicker \
-    MagicSmokeWallpapers \
-    NoiseField \
-    PhaseBeam \
-    VisualizationWallpapers \
-    PhotoTable \
-    SoundRecorder \
-    PhotoPhase
+    SoundRecorder 
 
 # Extra tools in CM
 PRODUCT_PACKAGES += \
     vim \
     zip \
-    unrar \
-    curl
+    unrar 
