@@ -103,9 +103,9 @@ PRODUCT_COPY_FILES += \
     vendor/xoplax/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
 endif
 
-# CM-specific init file
+# Xoplax-specific init file
 PRODUCT_COPY_FILES += \
-    vendor/xoplax/prebuilt/common/etc/init.local.rc:root/init.cm.rc
+    vendor/xoplax/prebuilt/common/etc/init.local.rc:root/init.xos.rc
 
 # Bring in camera effects
 PRODUCT_COPY_FILES +=  \
@@ -351,6 +351,7 @@ endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.cm.display.version=$(CM_DISPLAY_VERSION)
+  ro.xoplax.version=$(XOS_VERSION)
 
 # CyanogenMod Platform SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
