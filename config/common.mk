@@ -124,7 +124,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_0719.kl
 
-# This is CM!
+# This is CM based!
 PRODUCT_COPY_FILES += \
     vendor/xoplax/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
 
@@ -133,6 +133,10 @@ include vendor/xoplax/config/themes_common.mk
 
 # SuperSU
 include vendor/xoplax/config/supersu.mk
+
+# Kernel Auditor
+PRODUCT_COPY_FILES =+ \
+    vendor/xoplax/prebuilt/common/app/com.grarak.kerneladiutor.apk:system/app/KernelAuditor/KernelAuditor.apk
 
 # Required CM packages
 PRODUCT_PACKAGES += \
