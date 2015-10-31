@@ -65,10 +65,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.selinux=1
 
-ifneq ($(TARGET_BUILD_VARIANT),user)
-# Thank you, please drive thru!
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.dun.override=0
-endif
 
 ifneq ($(TARGET_BUILD_VARIANT),eng)
 # Enable ADB authentication
@@ -135,33 +132,33 @@ include vendor/xoplax/config/themes_common.mk
 include vendor/xoplax/config/supersu.mk
 
 # Kernel Auditor
-PRODUCT_COPY_FILES =+ \
+PRODUCT_COPY_FILES += \
     vendor/xoplax/prebuilt/common/app/com.grarak.kerneladiutor.apk:system/app/KernelAuditor/KernelAuditor.apk
 
-# Required CM packages
+# Required XOS packages
 PRODUCT_PACKAGES += \
     Development \
     BluetoothExt \
     Profiles
 
-# Optional CM packages
+# Optional XOS packages
 PRODUCT_PACKAGES += \
     VoicePlus \
     Basic \
     libemoji \
     Terminal
 
-# Custom CM packages
+# Custom XOS packages
 PRODUCT_PACKAGES += \
     Launcher3 \
-    SonicLauncher \ 
     AudioFX \
     CMWallpapers \
     CMFileManager \
     Eleven \
     LockClock \
     CMHome \
-    CMSettingsProvider
+    CMSettingsProvider \
+    SonicLauncher
 
 # CM Platform Library
 PRODUCT_PACKAGES += \
@@ -174,7 +171,7 @@ PRODUCT_PACKAGES += \
     org.cyanogenmod.hardware \
     org.cyanogenmod.hardware.xml
 
-# Extra tools in CM
+# Extra tools in XOS
 PRODUCT_PACKAGES += \
     libsepol \
     e2fsck \
@@ -195,7 +192,7 @@ PRODUCT_PACKAGES += \
     oprofiled \
     strace
 
-# Openssh
+# SSHD
 PRODUCT_PACKAGES += \
     scp \
     sftp \
@@ -232,84 +229,86 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/xoplax/overlay/common
 
-# Set CM_BUILDTYPE from the env RELEASE_TYPE, for jenkins compat
-
-ifndef CM_BUILDTYPE
+ifndef XOPLAX_BUILDTYPE
     ifdef RELEASE_TYPE
         # Starting with "CM_" is optional
-        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^CM_||g')
-        CM_BUILDTYPE := $(RELEASE_TYPE)
+        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^XOS_||g')
+        XOPLAX_BUILDTYPE := $(RELEASE_TYPE)
     endif
+endif
+
+# Filter out random types, so it'll reset to HOMEMADE
+ifeq ($(filter RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL,$(XOPLAX_BUILDTYPE)),)
+    XOPLAX_BUILDTYPE :=
 endif
 
 # Filter out random types, so it'll reset to UNOFFICIAL
-ifeq ($(filter RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL,$(CM_BUILDTYPE)),)
-    CM_BUILDTYPE :=
+ifeq ($(filter userdebug user eng,$(BUILDTYPE)),)
+    BUILDTYPE :=
 endif
 
-ifdef CM_BUILDTYPE
-    ifneq ($(CM_BUILDTYPE), SNAPSHOT)
-        ifdef CM_EXTRAVERSION
-            CM_BUILDTYPE := SNAPSHOT
-            # Remove leading dash from CM_EXTRAVERSION
-            CM_EXTRAVERSION := $(shell echo $(CM_EXTRAVERSION) | sed 's/-//')
-            # Add leading dash to CM_EXTRAVERSION
-            CM_EXTRAVERSION := -$(CM_EXTRAVERSION)
-        endif
+ifndef BUILDTYPE
+    BUILDTYPE := UNOFFICIAL
+else
+    ifeq ($(BUILD_TYPE), userdebug)
+         BUILDTYPE := nightly
     else
-        ifndef CM_EXTRAVERSION
-            # Force build type to EXPERIMENTAL, SNAPSHOT mandates a tag
-            CM_BUILDTYPE := EXPERIMENTAL
-        else
-            # Remove leading dash from CM_EXTRAVERSION
-            CM_EXTRAVERSION := $(shell echo $(CM_EXTRAVERSION) | sed 's/-//')
-            # Add leading dash to CM_EXTRAVERSION
-            CM_EXTRAVERSION := -$(CM_EXTRAVERSION)
+         ifeq ($(filter user eng,$(BUILDTYPE)),)
+         BUILDTYPE := release
+    endif
+endif
+
+ifdef XOPLAX_BUILDTYPE
+    ifeq ($(XOPLAX_BUILDTYPE), SNAPSHOT)
+            XOPLAX_BUILDTYPE := SNAPSHOT
+    else
+        ifeq ($(XOPLAX_BUILDTYPE), EXPERIMENTAL)
+            XOPLAX_BUILDTYPE := EXPERIMENTAL
         endif
     endif
 else
-    # If CM_BUILDTYPE is not defined, set to UNOFFICIAL
-    CM_BUILDTYPE := HOMEMADE
-    CM_EXTRAVERSION :=
+    # If XOPLAX_BUILDTYPE is not defined, set to HOMEMADE
+    XOPLAX_BUILDTYPE := HOMEMADE
+    XOPLAX_EXTRAVERSION :=
 endif
 
-ifeq ($(CM_BUILDTYPE), HOMEMADE)
+ifeq ($(XOPLAX_BUILDTYPE), HOMEMADE)
     ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
-        CM_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
+        XOPLAX_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
     endif
 endif
 
-ifeq ($(CM_BUILDTYPE), RELEASE)
+ifeq ($(XOPLAX_BUILDTYPE), RELEASE)
     ifndef TARGET_VENDOR_RELEASE_BUILD_ID
-        CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
+        XOPLAX_VERSION := $(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
     else
         ifeq ($(TARGET_BUILD_VARIANT),user)
-            CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
+            XOPLAX_VERSION := $(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
         else
-            CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
+            XOPLAX_VERSION := $(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
         endif
     endif
 else
     ifeq ($(PRODUCT_VERSION_MINOR),0)
-        CM_VERSION := $(PRODUCT_VERSION_MAJOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
+        XOPLAX_VERSION := $(shell date -u +%Y%m%d)-$(XOPLAX_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
     else
-        CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
+        XOPLAX_VERSION := $(shell date -u +%Y%m%d)-$(XOPLAX_BUILDTYPE)-$(CM_BUILD)
     endif
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-  ro.cm.version=$(CM_VERSION) \
-  ro.cm.releasetype=$(CM_BUILDTYPE) \
-  ro.modversion=$(CM_VERSION) \
+  ro.cm.version=$(XOPLAX_VERSION) \
+  ro.cm.releasetype=$(XOPLAX_BUILDTYPE) \
+  ro.modversion=$(XOPLAX_VERSION) \
   ro.cmlegal.url=https://cyngn.com/legal/privacy-policy
 
 -include vendor/cm-priv/keys/keys.mk
 
-CM_DISPLAY_VERSION := $(CM_VERSION)
+XOPLAX_DISPLAY_VERSION := $(XOPLAX_VERSION)
 
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),)
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
-  ifneq ($(CM_BUILDTYPE), UNOFFICIAL)
+  ifneq ($(XOPLAX_BUILDTYPE), UNOFFICIAL)
     ifndef TARGET_VENDOR_RELEASE_BUILD_ID
       ifneq ($(CM_EXTRAVERSION),)
         # Remove leading dash from CM_EXTRAVERSION
@@ -321,7 +320,7 @@ ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
     else
       TARGET_VENDOR_RELEASE_BUILD_ID := $(TARGET_VENDOR_RELEASE_BUILD_ID)
     endif
-    CM_DISPLAY_VERSION=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)
+    XOPLAX_DISPLAY_VERSION=$(TARGET_VENDOR_RELEASE_BUILD_ID)
   endif
 endif
 endif
@@ -347,7 +346,7 @@ ifndef CM_PLATFORM_REV
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-  ro.cm.display.version=$(CM_DISPLAY_VERSION)
+  ro.cm.display.version=$(XOPLAX_DISPLAY_VERSION)
   ro.xoplax.version=$(XOS_VERSION)
 
 # CyanogenMod Platform SDK Version
@@ -359,7 +358,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
   ro.cm.build.version.plat.rev=$(CM_PLATFORM_REV)
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
-
--include vendor/cyngn/product.mk
 
 $(call prepend-product-if-exists, vendor/extra/product.mk)
