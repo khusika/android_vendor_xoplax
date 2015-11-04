@@ -35,7 +35,7 @@ PRODUCT_BOOTANIMATION := vendor/xoplax/prebuilt/common/bootanimation/$(TARGET_BO
 endif
 endif
 
-ifdef CM_NIGHTLY
+ifdef XOPLAX_NIGHTLY
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rommanager.developerid=xoplaxosnightly
 else
@@ -67,7 +67,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.dun.override=0
 
-ifneq ($(TARGET_BUILD_VARIANT),eng)
+ifneq ($(TARGET_BUILD_VARIANT),user)
 # Enable ADB authentication
 ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
 endif
@@ -229,9 +229,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/xoplax/overlay/common
 
+
 ifndef XOPLAX_BUILDTYPE
     ifdef RELEASE_TYPE
-        # Starting with "CM_" is optional
         RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^XOS_||g')
         XOPLAX_BUILDTYPE := $(RELEASE_TYPE)
     endif
@@ -247,14 +247,15 @@ ifeq ($(filter userdebug user eng,$(BUILDTYPE)),)
     BUILDTYPE :=
 endif
 
-ifndef BUILDTYPE
+ifeq ($(BUILDTYPE),)
     BUILDTYPE := UNOFFICIAL
 else
     ifeq ($(BUILD_TYPE), userdebug)
          BUILDTYPE := nightly
     else
          ifeq ($(filter user eng,$(BUILDTYPE)),)
-         BUILDTYPE := release
+         	BUILDTYPE := release
+	 endif
     endif
 endif
 
@@ -296,6 +297,7 @@ else
     endif
 endif
 
+
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.cm.version=$(XOPLAX_VERSION) \
   ro.cm.releasetype=$(XOPLAX_BUILDTYPE) \
@@ -306,9 +308,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 XOPLAX_DISPLAY_VERSION := $(XOPLAX_VERSION)
 
-ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),)
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
-  ifneq ($(XOPLAX_BUILDTYPE), UNOFFICIAL)
+  ifneq ($(BUILDTYPE), UNOFFICIAL)
     ifndef TARGET_VENDOR_RELEASE_BUILD_ID
       ifneq ($(CM_EXTRAVERSION),)
         # Remove leading dash from CM_EXTRAVERSION
@@ -322,7 +323,6 @@ ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
     endif
     XOPLAX_DISPLAY_VERSION=$(TARGET_VENDOR_RELEASE_BUILD_ID)
   endif
-endif
 endif
 
 # by default, do not update the recovery with system updates
@@ -360,3 +360,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 
 $(call prepend-product-if-exists, vendor/extra/product.mk)
+
