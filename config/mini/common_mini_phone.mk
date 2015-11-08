@@ -1,10 +1,10 @@
-# Inherit common CM stuff
+# Inherit common XOS stuff
 $(call inherit-product, vendor/xoplax/config/common.mk)
 
-# Include CM audio files
-include vendor/xoplax/config/cm_audio.mk
+# Include XOS audio files
+include vendor/xoplax/config/xoplax_audio.mk
 
-# Required CM packages
+# Required XOS packages
 PRODUCT_PACKAGES += \
     LatinIME
 
@@ -15,5 +15,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ifeq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
     PRODUCT_COPY_FILES += \
-        vendor/xoplax/prebuilt/common/bootanimation/800.zip:system/media/bootanimation.zip
+        vendor/xoplax/prebuilt/common/bootanimation/320.zip:system/media/bootanimation.zip
 endif
+
+$(call inherit-product, vendor/xoplax/config/telephony.mk)

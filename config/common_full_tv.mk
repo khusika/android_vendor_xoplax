@@ -1,4 +1,4 @@
-# Inherit common CM stuff
+# Inherit common XOS stuff
 $(call inherit-product, vendor/xoplax/config/common_full.mk)
 
 # Default notification/alarm sounds

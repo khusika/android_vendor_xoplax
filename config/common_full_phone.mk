@@ -1,11 +1,11 @@
-# Inherit common CM stuff
+# Inherit common XOS stuff
 $(call inherit-product, vendor/xoplax/config/common_full.mk)
 
-# Required CM packages
+# Required XOS packages
 PRODUCT_PACKAGES += \
     LatinIME
 
-# Include CM LatinIME dictionaries
+# Include XOS LatinIME dictionaries
 PRODUCT_PACKAGE_OVERLAYS += vendor/xoplax/overlay/dictionaries
 
 # Default notification/alarm sounds
