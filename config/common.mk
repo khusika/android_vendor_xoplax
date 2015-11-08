@@ -152,7 +152,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Launcher3 \
     AudioFX \
-    FileManager \
+    CMFileManager \
     CMWallpapers \
     Eleven \
     LockClock \
