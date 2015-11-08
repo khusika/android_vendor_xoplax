@@ -158,7 +158,7 @@ PRODUCT_PACKAGES += \
     LockClock \
     CMHome \
     CMSettingsProvider \
-    SonicLauncher
+    Launcher
 
 # CM Platform Library
 PRODUCT_PACKAGES += \
