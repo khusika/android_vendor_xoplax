@@ -180,9 +180,7 @@ PRODUCT_PACKAGES += \
     bash \
     htop \
     powertop \
-    mount.exfat \
-    fsck.exfat \
-    mkfs.exfat \
+    lsof \
     mkfs.f2fs \
     fsck.f2fs \
     fibmap.f2fs \
@@ -191,6 +189,15 @@ PRODUCT_PACKAGES += \
     gdbserver \
     oprofiled \
     strace
+
+WITH_EXFAT ?= true
+ifeq ($(WITH_EXFAT),true)
+TARGET_USES_EXFAT := true
+PRODUCT_PACKAGES += \
+    mount.exfat \
+    fsck.exfat \
+    mkfs.exfat
+endif
 
 # SSHD
 PRODUCT_PACKAGES += \
