@@ -11,6 +11,7 @@ CHANGELOG (notable new features)
 * Common: Android 5.1.1_r29
 * Common: Tweaks up code
 * Common: Android Security Patch Level : 11 October 2015
+* ARM: Compiled with 4.9 Linaro toolchain
 
 # XOS 2.1 P2 (aka Project Revolution)
 * Common: Android 5.1.1 (Google)
