@@ -35,13 +35,8 @@ PRODUCT_BOOTANIMATION := vendor/xoplax/prebuilt/common/bootanimation/$(TARGET_BO
 endif
 endif
 
-ifdef XOPLAX_NIGHTLY
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rommanager.developerid=xoplaxosnightly
-else
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rommanager.developerid=xoplaxos
-endif
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -236,101 +231,27 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/xoplax/overlay/common
 
-
-ifndef XOPLAX_BUILDTYPE
-    ifdef RELEASE_TYPE
-        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^XOS_||g')
-        XOPLAX_BUILDTYPE := $(RELEASE_TYPE)
-    endif
-endif
-
-# Filter out random types, so it'll reset to HOMEMADE
-ifeq ($(filter RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL,$(XOPLAX_BUILDTYPE)),)
-    XOPLAX_BUILDTYPE :=
-endif
-
-# Filter out random types, so it'll reset to UNOFFICIAL
-ifeq ($(filter userdebug user eng,$(BUILDTYPE)),)
-    BUILDTYPE :=
-endif
-
-ifeq ($(BUILDTYPE),)
-    BUILDTYPE := UNOFFICIAL
-else
-    ifeq ($(BUILD_TYPE), userdebug)
-         BUILDTYPE := nightly
-    else
-         ifeq ($(filter user eng,$(BUILDTYPE)),)
-         	BUILDTYPE := release
-	 endif
-    endif
-endif
-
-ifdef XOPLAX_BUILDTYPE
-    ifeq ($(XOPLAX_BUILDTYPE), SNAPSHOT)
-            XOPLAX_BUILDTYPE := SNAPSHOT
-    else
-        ifeq ($(XOPLAX_BUILDTYPE), EXPERIMENTAL)
-            XOPLAX_BUILDTYPE := EXPERIMENTAL
-        endif
-    endif
-else
-    # If XOPLAX_BUILDTYPE is not defined, set to HOMEMADE
-    XOPLAX_BUILDTYPE := HOMEMADE
-    XOPLAX_EXTRAVERSION :=
-endif
-
-ifeq ($(XOPLAX_BUILDTYPE), HOMEMADE)
-    ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
-        XOPLAX_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
-    endif
-endif
-
-ifeq ($(XOPLAX_BUILDTYPE), RELEASE)
-    ifndef TARGET_VENDOR_RELEASE_BUILD_ID
-        XOPLAX_VERSION := $(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
-    else
-        ifeq ($(TARGET_BUILD_VARIANT),user)
-            XOPLAX_VERSION := $(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
-        else
-            XOPLAX_VERSION := $(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
-        endif
-    endif
-else
-    ifeq ($(PRODUCT_VERSION_MINOR),0)
-        XOPLAX_VERSION := $(shell date -u +%Y%m%d)-$(XOPLAX_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
-    else
-        XOPLAX_VERSION := $(shell date -u +%Y%m%d)-$(XOPLAX_BUILDTYPE)-$(CM_BUILD)
-    endif
-endif
-
-
 PRODUCT_PROPERTY_OVERRIDES += \
-  ro.cm.version=$(XOPLAX_VERSION) \
-  ro.cm.releasetype=$(XOPLAX_BUILDTYPE) \
+  ro.xos.version=$(XOPLAX_VERSION) \
+  ro.xos.releasetype=$(XOPLAX_BUILDTYPE) \
   ro.modversion=$(XOPLAX_VERSION) \
   ro.cmlegal.url=https://cyngn.com/legal/privacy-policy
 
 -include vendor/cm-priv/keys/keys.mk
 
-XOPLAX_DISPLAY_VERSION := $(XOPLAX_VERSION)
+# XoplaxOS version
+XOPLAX_RELEASE = false
+XOPLAX_VERSION_MAJOR = 2.
+XOPLAX_VERSION_MINOR = 1
 
-ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
-  ifneq ($(BUILDTYPE), UNOFFICIAL)
-    ifndef TARGET_VENDOR_RELEASE_BUILD_ID
-      ifneq ($(CM_EXTRAVERSION),)
-        # Remove leading dash from CM_EXTRAVERSION
-        CM_EXTRAVERSION := $(shell echo $(CM_EXTRAVERSION) | sed 's/-//')
-        TARGET_VENDOR_RELEASE_BUILD_ID := $(CM_EXTRAVERSION)
-      else
-        TARGET_VENDOR_RELEASE_BUILD_ID := $(shell date -u +%Y%m%d)
-      endif
-    else
-      TARGET_VENDOR_RELEASE_BUILD_ID := $(TARGET_VENDOR_RELEASE_BUILD_ID)
-    endif
-    XOPLAX_DISPLAY_VERSION=$(TARGET_VENDOR_RELEASE_BUILD_ID)
-  endif
+# Release
+ifeq ($(XOPLAX_RELEASE),true)
+    XOPLAX_VERSION := xos-$(XOPLAX_VERSION_MAJOR).$(XOPLAX_VERSION_MINOR)-$MILESTONE-$(shell date -u +%Y%m%d)-$(XOPLAX_BUILD)
+else
+    XOPLAX_VERSION := xos-$(XOPLAX_VERSION_MAJOR).$(XOPLAX_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(XOPLAX_BUILD)
 endif
+
+XOPLAX_DISPLAY_VERSION := $(XOPLAX_VERSION)
 
 # by default, do not update the recovery with system updates
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.recovery_update=false
@@ -353,7 +274,7 @@ ifndef CM_PLATFORM_REV
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-  ro.cm.display.version=$(XOPLAX_DISPLAY_VERSION)
+  ro.xos.display.version=$(XOPLAX_DISPLAY_VERSION)
   ro.xoplax.version=$(XOS_VERSION)
 
 # CyanogenMod Platform SDK Version
