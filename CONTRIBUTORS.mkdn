@@ -2,20 +2,21 @@ Xoplax OS
 ===========
 
 ####Lead Development:
-* **[Anonim47] (https://github.com/Anonim47)
+* **[Anonim47] (https://github.com/Anonim47)**
 
 <br>
 ####Development Team:
-* **[estiko] (https://github.com/estiko)
-* **[AngSanley] (https://github.com/AngSanley)
-* **[khusika] (https://github.com/khusika)
+* **[estiko] (https://github.com/estiko)**
+* **[AngSanley] (https://github.com/AngSanley)**
+* **[khusika] (https://github.com/khusika)**
 
 <br>
 ####Graphics Design:
-* **[Joe Biever] 
-* **[Fajar Mahameru Wardana]
-* **[Mochamad Revanza Kurniawan]
+* **[Joe Biever] **
+* **[Fajar Mahameru Wardana]**
+* **[Mochamad Revanza Kurniawan]**
 
+<br>
 ####Device Maintainers:
 * _armani: Anonim47, AngSanley
 * _p3100: AngSanley
