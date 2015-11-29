@@ -7,6 +7,14 @@ Visit https://github.com/XoplaxOS for full source and git access.
 CHANGELOG (notable new features)
 ---------
 
+# XOS 2.1 P5 (Codenamed Adamas)
+* Common: Android 5.1.1_r26
+* Common: Lokalisasi Xoplax OS 
+* Common: Ringtone baru 
+* Common: Removed OPGesture 
+* Common: Perbaikan performa serta fitur
+* Common: New icons
+
 # XOS 2.1 P4 (codenamed Caligo)
 * Common: Android 5.1.1_r26
 * Common: Peningkatan bahasa Indonesia dalam antarmuka
