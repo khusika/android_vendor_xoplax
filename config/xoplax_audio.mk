@@ -1,5 +1,6 @@
 #
 # CyanogenMod Audio Files
+# Xoplax Audio Files
 #
 
 ALARM_PATH := vendor/xoplax/prebuilt/common/media/audio/alarms
@@ -40,3 +41,13 @@ PRODUCT_COPY_FILES += \
 	$(RINGTONE_PATH)/Rockin.ogg:system/media/audio/ringtones/Rockin.ogg \
 	$(RINGTONE_PATH)/Sheep.mp3:system/media/audio/ringtones/Sheep.mp3
 endif
+
+#
+# XOPLAX AUDIO FILES
+#
+
+# Ringtones
+
+PRODUCT_COPY_FILES += \
+	$(RINGTONE_PATH)/aerodynamics.ogg:system/media/audio/ringtones/aerodynamics.ogg
+
