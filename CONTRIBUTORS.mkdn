@@ -17,15 +17,6 @@ Xoplax OS
 * **[Mochamad Revanza Kurniawan]**
 
 <br>
-####Device Maintainers:
-* _armani: Anonim47, AngSanley
-* _p3100: AngSanley
-* _p5100: Anonim47, AngSanley
-* _sprout: Anonim47
-* _wt88047: Anonim47
-* _wt86518: JAV-Team
-* _armani_row: estiko
-
 ####Localisation:
 * _Indonesia: Anonim47
 
