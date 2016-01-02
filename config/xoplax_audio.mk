@@ -1,6 +1,5 @@
 #
 # CyanogenMod Audio Files
-# Xoplax Audio Files
 #
 
 ALARM_PATH := vendor/xoplax/prebuilt/common/media/audio/alarms

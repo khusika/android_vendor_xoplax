@@ -11,7 +11,7 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/xoplax/overlay/dictionaries
 # Default notification/alarm sounds
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.notification_sound=Argon.ogg \
-    ro.config.alarm_alert=Helium.ogg
+    ro.config.alarm_alert=aerodynamics.ogg
 
 ifeq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
     PRODUCT_COPY_FILES += \
